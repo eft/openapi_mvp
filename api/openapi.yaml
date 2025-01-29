@@ -1,0 +1,65 @@
+openapi: 3.0.0
+info:
+  title: Minimum Spec
+  version: 0.1.9
+servers:
+- url: http://localhost
+paths:
+  /content:
+    get:
+      operationId: getContent
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentItem'
+          description: default response
+components:
+  schemas:
+    ContentItem:
+      discriminator:
+        propertyName: contentType
+      oneOf:
+      - $ref: '#/components/schemas/File'
+      - $ref: '#/components/schemas/Folder'
+      type: object
+    CommonProperties:
+      discriminator:
+        propertyName: contentType
+      properties:
+        contentType:
+          description: Folder/File
+          type: string
+        name:
+          description: The name of the item.
+          type: string
+        readonly:
+          description: Read only if true
+          type: boolean
+      required:
+      - contentType
+      - name
+      type: object
+    Folder:
+      allOf:
+      - $ref: '#/components/schemas/CommonProperties'
+      - properties:
+          children:
+            description: Optional files and folders
+            items:
+              $ref: '#/components/schemas/ContentItem'
+            type: array
+        type: object
+    File:
+      allOf:
+      - $ref: '#/components/schemas/CommonProperties'
+      - properties:
+          fileType:
+            type: string
+        type: object
+      example:
+        readonly: true
+        name: name
+        contentType: contentType
+        fileType: fileType
