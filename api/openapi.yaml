@@ -13,11 +13,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ContentItem'
+                $ref: '#/components/schemas/ContentItemResponse'
           description: default response
 components:
   schemas:
-    ContentItem:
+    ContentItemResponse:
       discriminator:
         propertyName: contentType
       oneOf:
@@ -48,7 +48,7 @@ components:
           children:
             description: Optional files and folders
             items:
-              $ref: '#/components/schemas/ContentItem'
+              $ref: '#/components/schemas/ContentItemResponse'
             type: array
         type: object
     File:

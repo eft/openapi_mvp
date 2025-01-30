@@ -14,10 +14,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ContentItem'
+                $ref: '#/components/schemas/ContentItemResponse'
 components:
   schemas:
-    ContentItem:
+    ContentItemResponse:
       type: object
       discriminator:
         propertyName: contentType
@@ -49,7 +49,7 @@ components:
             children:
               description: Optional files and folders
               items:
-                $ref: '#/components/schemas/ContentItem'
+                $ref: '#/components/schemas/ContentItemResponse'
               type: array
     File:
       allOf:

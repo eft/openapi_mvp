@@ -1,0 +1,39 @@
+[main] INFO  o.o.codegen.DefaultGenerator - Generating with dryRun=false
+[main] INFO  o.o.codegen.DefaultGenerator - OpenAPI Generator: go (client)
+[main] INFO  o.o.codegen.DefaultGenerator - Generator 'go' is considered stable.
+[main] INFO  o.o.c.languages.AbstractGoCodegen - Environment variable GO_POST_PROCESS_FILE not defined so Go code may not be properly formatted. To define it, try `export GO_POST_PROCESS_FILE="/usr/local/bin/gofmt -w"` (Linux/Mac)
+[main] INFO  o.o.c.languages.AbstractGoCodegen - NOTE: To enable file post-processing, 'enablePostProcessFile' must be set to `true` (--enable-post-process-file for CLI).
+[main] WARN  o.o.codegen.DefaultCodegen - 'ContentItemResponse' defines discriminator 'contentType', but the referenced schema 'File' is incorrect. contentType is missing from the schema, define it as required and type string
+[main] WARN  o.o.codegen.DefaultCodegen - 'ContentItemResponse' defines discriminator 'contentType', but the referenced schema 'Folder' is incorrect. contentType is missing from the schema, define it as required and type string
+[main] INFO  o.o.codegen.TemplateManager - writing file .\model_common_properties.go
+[main] INFO  o.o.codegen.TemplateManager - writing file .\docs\CommonProperties.md
+[main] INFO  o.o.codegen.TemplateManager - writing file .\model_content_item_response.go
+[main] INFO  o.o.codegen.TemplateManager - writing file .\docs\ContentItemResponse.md
+[main] INFO  o.o.codegen.TemplateManager - writing file .\model_file.go
+[main] INFO  o.o.codegen.TemplateManager - writing file .\docs\File.md
+[main] INFO  o.o.codegen.TemplateManager - writing file .\model_folder.go
+[main] INFO  o.o.codegen.TemplateManager - writing file .\docs\Folder.md
+[main] WARN  o.o.codegen.DefaultCodegen - 'ContentItemResponse' defines discriminator 'contentType', but the referenced schema 'File' is incorrect. contentType is missing from the schema, define it as required and type string
+[main] WARN  o.o.codegen.DefaultCodegen - 'ContentItemResponse' defines discriminator 'contentType', but the referenced schema 'Folder' is incorrect. contentType is missing from the schema, define it as required and type string
+[main] INFO  o.o.codegen.TemplateManager - writing file .\api_default.go
+[main] INFO  o.o.codegen.TemplateManager - Skipped .\test\api_default_test.go (Test files never overwrite an existing file of the same name.)
+[main] INFO  o.o.codegen.TemplateManager - writing file .\docs\DefaultAPI.md
+[main] INFO  o.o.codegen.TemplateManager - writing file .\api\openapi.yaml
+[main] INFO  o.o.codegen.TemplateManager - writing file .\README.md
+[main] INFO  o.o.codegen.TemplateManager - writing file .\git_push.sh
+[main] INFO  o.o.codegen.TemplateManager - writing file .\.gitignore
+[main] INFO  o.o.codegen.TemplateManager - writing file .\configuration.go
+[main] INFO  o.o.codegen.TemplateManager - writing file .\client.go
+[main] INFO  o.o.codegen.TemplateManager - writing file .\response.go
+[main] INFO  o.o.codegen.TemplateManager - writing file .\go.mod
+[main] INFO  o.o.codegen.TemplateManager - writing file .\go.sum
+[main] INFO  o.o.codegen.TemplateManager - writing file D:\junk\openapi_mvp\.\.travis.yml
+[main] INFO  o.o.codegen.TemplateManager - writing file .\utils.go
+[main] INFO  o.o.codegen.TemplateManager - Skipped .\.openapi-generator-ignore (Skipped by supportingFiles options supplied by user.)
+[main] INFO  o.o.codegen.TemplateManager - writing file .\.openapi-generator\VERSION
+[main] INFO  o.o.codegen.TemplateManager - writing file .\.openapi-generator\FILES
+################################################################################
+# Thanks for using OpenAPI Generator.                                          #
+# Please consider donation to help us maintain this project ?                 #
+# https://opencollective.com/openapi_generator/donate                          #
+################################################################################

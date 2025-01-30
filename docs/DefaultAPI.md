@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## GetContent
 
-> ContentItem GetContent(ctx).Execute()
+> ContentItemResponse GetContent(ctx).Execute()
 
 
 
@@ -35,7 +35,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetContent``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetContent`: ContentItem
+	// response from `GetContent`: ContentItemResponse
 	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetContent`: %v\n", resp)
 }
 ```
@@ -51,7 +51,7 @@ Other parameters are passed through a pointer to a apiGetContentRequest struct v
 
 ### Return type
 
-[**ContentItem**](ContentItem.md)
+[**ContentItemResponse**](ContentItemResponse.md)
 
 ### Authorization
 

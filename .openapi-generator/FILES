@@ -6,7 +6,7 @@ api_default.go
 client.go
 configuration.go
 docs/CommonProperties.md
-docs/ContentItem.md
+docs/ContentItemResponse.md
 docs/DefaultAPI.md
 docs/File.md
 docs/Folder.md
@@ -14,7 +14,7 @@ git_push.sh
 go.mod
 go.sum
 model_common_properties.go
-model_content_item.go
+model_content_item_response.go
 model_file.go
 model_folder.go
 response.go

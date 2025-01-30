@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Children** | Pointer to [**[]ContentItem**](ContentItem.md) | Optional files and folders | [optional] 
+**Children** | Pointer to [**[]ContentItemResponse**](ContentItemResponse.md) | Optional files and folders | [optional] 
 
 ## Methods
 
@@ -27,20 +27,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetChildren
 
-`func (o *Folder) GetChildren() []ContentItem`
+`func (o *Folder) GetChildren() []ContentItemResponse`
 
 GetChildren returns the Children field if non-nil, zero value otherwise.
 
 ### GetChildrenOk
 
-`func (o *Folder) GetChildrenOk() (*[]ContentItem, bool)`
+`func (o *Folder) GetChildrenOk() (*[]ContentItemResponse, bool)`
 
 GetChildrenOk returns a tuple with the Children field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetChildren
 
-`func (o *Folder) SetChildren(v []ContentItem)`
+`func (o *Folder) SetChildren(v []ContentItemResponse)`
 
 SetChildren sets Children field to given value.
 
