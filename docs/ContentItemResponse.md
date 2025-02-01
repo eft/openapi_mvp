@@ -7,13 +7,13 @@ Name | Type | Description | Notes
 **ContentType** | **string** | Folder/File | 
 **Name** | **string** | The name of the item. | 
 **Readonly** | Pointer to **bool** | Read only if true | [optional] 
-**Children** | Pointer to [**[]ContentItemResponse**](ContentItemResponse.md) | Optional files and folders | [optional] 
+**Children** | [**[]ContentItemResponse**](ContentItemResponse.md) | Optional files and folders | 
 
 ## Methods
 
 ### NewContentItemResponse
 
-`func NewContentItemResponse(contentType string, name string, ) *ContentItemResponse`
+`func NewContentItemResponse(contentType string, name string, children []ContentItemResponse, ) *ContentItemResponse`
 
 NewContentItemResponse instantiates a new ContentItemResponse object
 This constructor will assign default values to properties that have it defined,
@@ -112,11 +112,6 @@ and a boolean to check if the value has been set.
 
 SetChildren sets Children field to given value.
 
-### HasChildren
-
-`func (o *ContentItemResponse) HasChildren() bool`
-
-HasChildren returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -50,6 +50,8 @@ components:
             items:
               $ref: '#/components/schemas/ContentItemResponse'
             type: array
+        required:
+        - children
         type: object
     File:
       allOf:

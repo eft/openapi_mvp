@@ -23,7 +23,7 @@ var _ MappedNullable = &Folder{}
 type Folder struct {
 	CommonProperties
 	// Optional files and folders
-	Children []ContentItemResponse `json:"children,omitempty"`
+	Children []ContentItemResponse `json:"children"`
 }
 
 type _Folder Folder
@@ -32,10 +32,11 @@ type _Folder Folder
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFolder(contentType string, name string) *Folder {
+func NewFolder(children []ContentItemResponse, contentType string, name string) *Folder {
 	this := Folder{}
 	this.ContentType = contentType
 	this.Name = name
+	this.Children = children
 	return &this
 }
 
@@ -47,34 +48,26 @@ func NewFolderWithDefaults() *Folder {
 	return &this
 }
 
-// GetChildren returns the Children field value if set, zero value otherwise.
+// GetChildren returns the Children field value
 func (o *Folder) GetChildren() []ContentItemResponse {
-	if o == nil || IsNil(o.Children) {
+	if o == nil {
 		var ret []ContentItemResponse
 		return ret
 	}
+
 	return o.Children
 }
 
-// GetChildrenOk returns a tuple with the Children field value if set, nil otherwise
+// GetChildrenOk returns a tuple with the Children field value
 // and a boolean to check if the value has been set.
 func (o *Folder) GetChildrenOk() ([]ContentItemResponse, bool) {
-	if o == nil || IsNil(o.Children) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Children, true
 }
 
-// HasChildren returns a boolean if a field has been set.
-func (o *Folder) HasChildren() bool {
-	if o != nil && !IsNil(o.Children) {
-		return true
-	}
-
-	return false
-}
-
-// SetChildren gets a reference to the given []ContentItemResponse and assigns it to the Children field.
+// SetChildren sets field value
 func (o *Folder) SetChildren(v []ContentItemResponse) {
 	o.Children = v
 }
@@ -97,9 +90,7 @@ func (o Folder) ToMap() (map[string]interface{}, error) {
 	if errCommonProperties != nil {
 		return map[string]interface{}{}, errCommonProperties
 	}
-	if !IsNil(o.Children) {
-		toSerialize["children"] = o.Children
-	}
+	toSerialize["children"] = o.Children
 	return toSerialize, nil
 }
 
@@ -108,6 +99,7 @@ func (o *Folder) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"children",
 		"contentType",
 		"name",
 	}
