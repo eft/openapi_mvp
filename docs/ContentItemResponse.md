@@ -8,12 +8,13 @@ Name | Type | Description | Notes
 **Name** | **string** | The name of the item. | 
 **Readonly** | Pointer to **bool** | Read only if true | [optional] 
 **Children** | Pointer to [**[]ContentItemResponse**](ContentItemResponse.md) | Optional files and folders | [optional] 
+**Color** | **string** | contrived property for testing purposes | 
 
 ## Methods
 
 ### NewContentItemResponse
 
-`func NewContentItemResponse(contentType string, name string, ) *ContentItemResponse`
+`func NewContentItemResponse(contentType string, name string, color string, ) *ContentItemResponse`
 
 NewContentItemResponse instantiates a new ContentItemResponse object
 This constructor will assign default values to properties that have it defined,
@@ -117,6 +118,26 @@ SetChildren sets Children field to given value.
 `func (o *ContentItemResponse) HasChildren() bool`
 
 HasChildren returns a boolean if a field has been set.
+
+### GetColor
+
+`func (o *ContentItemResponse) GetColor() string`
+
+GetColor returns the Color field if non-nil, zero value otherwise.
+
+### GetColorOk
+
+`func (o *ContentItemResponse) GetColorOk() (*string, bool)`
+
+GetColorOk returns a tuple with the Color field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetColor
+
+`func (o *ContentItemResponse) SetColor(v string)`
+
+SetColor sets Color field to given value.
+
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

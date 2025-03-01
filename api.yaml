@@ -51,6 +51,11 @@ components:
               items:
                 $ref: '#/components/schemas/ContentItemResponse'
               type: array
+            color:
+              description: contrived property for testing purposes
+              type: string
+          required:
+            - color
     File:
       allOf:
         - $ref: '#/components/schemas/CommonProperties'

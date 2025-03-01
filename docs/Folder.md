@@ -5,12 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Children** | Pointer to [**[]ContentItemResponse**](ContentItemResponse.md) | Optional files and folders | [optional] 
+**Color** | **string** | contrived property for testing purposes | 
 
 ## Methods
 
 ### NewFolder
 
-`func NewFolder() *Folder`
+`func NewFolder(color string, ) *Folder`
 
 NewFolder instantiates a new Folder object
 This constructor will assign default values to properties that have it defined,
@@ -49,6 +50,26 @@ SetChildren sets Children field to given value.
 `func (o *Folder) HasChildren() bool`
 
 HasChildren returns a boolean if a field has been set.
+
+### GetColor
+
+`func (o *Folder) GetColor() string`
+
+GetColor returns the Color field if non-nil, zero value otherwise.
+
+### GetColorOk
+
+`func (o *Folder) GetColorOk() (*string, bool)`
+
+GetColorOk returns a tuple with the Color field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetColor
+
+`func (o *Folder) SetColor(v string)`
+
+SetColor sets Color field to given value.
+
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -24,6 +24,8 @@ type Folder struct {
 	CommonProperties
 	// Optional files and folders
 	Children []ContentItemResponse `json:"children,omitempty"`
+	// contrived property for testing purposes
+	Color string `json:"color"`
 }
 
 type _Folder Folder
@@ -32,10 +34,11 @@ type _Folder Folder
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFolder(contentType string, name string) *Folder {
+func NewFolder(color string, contentType string, name string) *Folder {
 	this := Folder{}
 	this.ContentType = contentType
 	this.Name = name
+	this.Color = color
 	return &this
 }
 
@@ -79,6 +82,30 @@ func (o *Folder) SetChildren(v []ContentItemResponse) {
 	o.Children = v
 }
 
+// GetColor returns the Color field value
+func (o *Folder) GetColor() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Color
+}
+
+// GetColorOk returns a tuple with the Color field value
+// and a boolean to check if the value has been set.
+func (o *Folder) GetColorOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Color, true
+}
+
+// SetColor sets field value
+func (o *Folder) SetColor(v string) {
+	o.Color = v
+}
+
 func (o Folder) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -100,6 +127,7 @@ func (o Folder) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Children) {
 		toSerialize["children"] = o.Children
 	}
+	toSerialize["color"] = o.Color
 	return toSerialize, nil
 }
 
@@ -108,6 +136,7 @@ func (o *Folder) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"color",
 		"contentType",
 		"name",
 	}
