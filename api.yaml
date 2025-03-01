@@ -51,8 +51,6 @@ components:
               items:
                 $ref: '#/components/schemas/ContentItemResponse'
               type: array
-          required:
-            - children
     File:
       allOf:
         - $ref: '#/components/schemas/CommonProperties'
