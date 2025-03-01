@@ -12,8 +12,8 @@ package mvp
 
 import (
 	"encoding/json"
-	"gopkg.in/validator.v2"
 	"fmt"
+	"gopkg.in/validator.v2"
 )
 
 // ContentItemResponse - struct for ContentItemResponse
@@ -112,6 +112,20 @@ func (obj *ContentItemResponse) GetActualInstance() (interface{}) {
 
 	if obj.Folder != nil {
 		return obj.Folder
+	}
+
+	// all schemas are nil
+	return nil
+}
+
+// Get the actual instance value
+func (obj ContentItemResponse) GetActualInstanceValue() (interface{}) {
+	if obj.File != nil {
+		return *obj.File
+	}
+
+	if obj.Folder != nil {
+		return *obj.Folder
 	}
 
 	// all schemas are nil
