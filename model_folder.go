@@ -21,7 +21,12 @@ var _ MappedNullable = &Folder{}
 
 // Folder struct for Folder
 type Folder struct {
-	CommonProperties
+	// The name of the item.
+	Name string `json:"name"`
+	// Read only if true
+	Readonly *bool `json:"readonly,omitempty"`
+	// Folder/File
+	ContentType string `json:"contentType"`
 	// Optional files and folders
 	Children []ContentItemResponse `json:"children,omitempty"`
 	// contrived property for testing purposes
@@ -34,10 +39,10 @@ type _Folder Folder
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFolder(color string, contentType string, name string) *Folder {
+func NewFolder(name string, contentType string, color string) *Folder {
 	this := Folder{}
-	this.ContentType = contentType
 	this.Name = name
+	this.ContentType = contentType
 	this.Color = color
 	return &this
 }
@@ -48,6 +53,86 @@ func NewFolder(color string, contentType string, name string) *Folder {
 func NewFolderWithDefaults() *Folder {
 	this := Folder{}
 	return &this
+}
+
+// GetName returns the Name field value
+func (o *Folder) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *Folder) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *Folder) SetName(v string) {
+	o.Name = v
+}
+
+// GetReadonly returns the Readonly field value if set, zero value otherwise.
+func (o *Folder) GetReadonly() bool {
+	if o == nil || IsNil(o.Readonly) {
+		var ret bool
+		return ret
+	}
+	return *o.Readonly
+}
+
+// GetReadonlyOk returns a tuple with the Readonly field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Folder) GetReadonlyOk() (*bool, bool) {
+	if o == nil || IsNil(o.Readonly) {
+		return nil, false
+	}
+	return o.Readonly, true
+}
+
+// HasReadonly returns a boolean if a field has been set.
+func (o *Folder) HasReadonly() bool {
+	if o != nil && !IsNil(o.Readonly) {
+		return true
+	}
+
+	return false
+}
+
+// SetReadonly gets a reference to the given bool and assigns it to the Readonly field.
+func (o *Folder) SetReadonly(v bool) {
+	o.Readonly = &v
+}
+
+// GetContentType returns the ContentType field value
+func (o *Folder) GetContentType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ContentType
+}
+
+// GetContentTypeOk returns a tuple with the ContentType field value
+// and a boolean to check if the value has been set.
+func (o *Folder) GetContentTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ContentType, true
+}
+
+// SetContentType sets field value
+func (o *Folder) SetContentType(v string) {
+	o.ContentType = v
 }
 
 // GetChildren returns the Children field value if set, zero value otherwise.
@@ -116,14 +201,11 @@ func (o Folder) MarshalJSON() ([]byte, error) {
 
 func (o Folder) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	serializedCommonProperties, errCommonProperties := json.Marshal(o.CommonProperties)
-	if errCommonProperties != nil {
-		return map[string]interface{}{}, errCommonProperties
+	toSerialize["name"] = o.Name
+	if !IsNil(o.Readonly) {
+		toSerialize["readonly"] = o.Readonly
 	}
-	errCommonProperties = json.Unmarshal([]byte(serializedCommonProperties), &toSerialize)
-	if errCommonProperties != nil {
-		return map[string]interface{}{}, errCommonProperties
-	}
+	toSerialize["contentType"] = o.ContentType
 	if !IsNil(o.Children) {
 		toSerialize["children"] = o.Children
 	}
@@ -136,9 +218,9 @@ func (o *Folder) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"color",
-		"contentType",
 		"name",
+		"contentType",
+		"color",
 	}
 
 	allProperties := make(map[string]interface{})

@@ -4,9 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ContentType** | **string** | Folder/File | 
 **Name** | **string** | The name of the item. | 
 **Readonly** | Pointer to **bool** | Read only if true | [optional] 
+**ContentType** | **string** | Folder/File | 
+**FileType** | Pointer to **string** |  | [optional] 
 **Children** | Pointer to [**[]ContentItemResponse**](ContentItemResponse.md) | Optional files and folders | [optional] 
 **Color** | **string** | contrived property for testing purposes | 
 
@@ -14,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewContentItemResponse
 
-`func NewContentItemResponse(contentType string, name string, color string, ) *ContentItemResponse`
+`func NewContentItemResponse(name string, contentType string, color string, ) *ContentItemResponse`
 
 NewContentItemResponse instantiates a new ContentItemResponse object
 This constructor will assign default values to properties that have it defined,
@@ -28,26 +29,6 @@ will change when the set of required properties is changed
 NewContentItemResponseWithDefaults instantiates a new ContentItemResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetContentType
-
-`func (o *ContentItemResponse) GetContentType() string`
-
-GetContentType returns the ContentType field if non-nil, zero value otherwise.
-
-### GetContentTypeOk
-
-`func (o *ContentItemResponse) GetContentTypeOk() (*string, bool)`
-
-GetContentTypeOk returns a tuple with the ContentType field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetContentType
-
-`func (o *ContentItemResponse) SetContentType(v string)`
-
-SetContentType sets ContentType field to given value.
-
 
 ### GetName
 
@@ -93,6 +74,51 @@ SetReadonly sets Readonly field to given value.
 `func (o *ContentItemResponse) HasReadonly() bool`
 
 HasReadonly returns a boolean if a field has been set.
+
+### GetContentType
+
+`func (o *ContentItemResponse) GetContentType() string`
+
+GetContentType returns the ContentType field if non-nil, zero value otherwise.
+
+### GetContentTypeOk
+
+`func (o *ContentItemResponse) GetContentTypeOk() (*string, bool)`
+
+GetContentTypeOk returns a tuple with the ContentType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetContentType
+
+`func (o *ContentItemResponse) SetContentType(v string)`
+
+SetContentType sets ContentType field to given value.
+
+
+### GetFileType
+
+`func (o *ContentItemResponse) GetFileType() string`
+
+GetFileType returns the FileType field if non-nil, zero value otherwise.
+
+### GetFileTypeOk
+
+`func (o *ContentItemResponse) GetFileTypeOk() (*string, bool)`
+
+GetFileTypeOk returns a tuple with the FileType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFileType
+
+`func (o *ContentItemResponse) SetFileType(v string)`
+
+SetFileType sets FileType field to given value.
+
+### HasFileType
+
+`func (o *ContentItemResponse) HasFileType() bool`
+
+HasFileType returns a boolean if a field has been set.
 
 ### GetChildren
 

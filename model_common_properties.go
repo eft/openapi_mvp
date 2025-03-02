@@ -21,8 +21,6 @@ var _ MappedNullable = &CommonProperties{}
 
 // CommonProperties struct for CommonProperties
 type CommonProperties struct {
-	// Folder/File
-	ContentType string `json:"contentType"`
 	// The name of the item.
 	Name string `json:"name"`
 	// Read only if true
@@ -35,9 +33,8 @@ type _CommonProperties CommonProperties
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCommonProperties(contentType string, name string) *CommonProperties {
+func NewCommonProperties(name string) *CommonProperties {
 	this := CommonProperties{}
-	this.ContentType = contentType
 	this.Name = name
 	return &this
 }
@@ -48,30 +45,6 @@ func NewCommonProperties(contentType string, name string) *CommonProperties {
 func NewCommonPropertiesWithDefaults() *CommonProperties {
 	this := CommonProperties{}
 	return &this
-}
-
-// GetContentType returns the ContentType field value
-func (o *CommonProperties) GetContentType() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ContentType
-}
-
-// GetContentTypeOk returns a tuple with the ContentType field value
-// and a boolean to check if the value has been set.
-func (o *CommonProperties) GetContentTypeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ContentType, true
-}
-
-// SetContentType sets field value
-func (o *CommonProperties) SetContentType(v string) {
-	o.ContentType = v
 }
 
 // GetName returns the Name field value
@@ -140,7 +113,6 @@ func (o CommonProperties) MarshalJSON() ([]byte, error) {
 
 func (o CommonProperties) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["contentType"] = o.ContentType
 	toSerialize["name"] = o.Name
 	if !IsNil(o.Readonly) {
 		toSerialize["readonly"] = o.Readonly
@@ -153,7 +125,6 @@ func (o *CommonProperties) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"contentType",
 		"name",
 	}
 

@@ -4,6 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Name** | **string** | The name of the item. | 
+**Readonly** | Pointer to **bool** | Read only if true | [optional] 
+**ContentType** | **string** | Folder/File | 
 **Children** | Pointer to [**[]ContentItemResponse**](ContentItemResponse.md) | Optional files and folders | [optional] 
 **Color** | **string** | contrived property for testing purposes | 
 
@@ -11,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewFolder
 
-`func NewFolder(color string, ) *Folder`
+`func NewFolder(name string, contentType string, color string, ) *Folder`
 
 NewFolder instantiates a new Folder object
 This constructor will assign default values to properties that have it defined,
@@ -25,6 +28,71 @@ will change when the set of required properties is changed
 NewFolderWithDefaults instantiates a new Folder object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetName
+
+`func (o *Folder) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *Folder) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *Folder) SetName(v string)`
+
+SetName sets Name field to given value.
+
+
+### GetReadonly
+
+`func (o *Folder) GetReadonly() bool`
+
+GetReadonly returns the Readonly field if non-nil, zero value otherwise.
+
+### GetReadonlyOk
+
+`func (o *Folder) GetReadonlyOk() (*bool, bool)`
+
+GetReadonlyOk returns a tuple with the Readonly field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReadonly
+
+`func (o *Folder) SetReadonly(v bool)`
+
+SetReadonly sets Readonly field to given value.
+
+### HasReadonly
+
+`func (o *Folder) HasReadonly() bool`
+
+HasReadonly returns a boolean if a field has been set.
+
+### GetContentType
+
+`func (o *Folder) GetContentType() string`
+
+GetContentType returns the ContentType field if non-nil, zero value otherwise.
+
+### GetContentTypeOk
+
+`func (o *Folder) GetContentTypeOk() (*string, bool)`
+
+GetContentTypeOk returns a tuple with the ContentType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetContentType
+
+`func (o *Folder) SetContentType(v string)`
+
+SetContentType sets ContentType field to given value.
+
 
 ### GetChildren
 

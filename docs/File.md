@@ -4,13 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Name** | **string** | The name of the item. | 
+**Readonly** | Pointer to **bool** | Read only if true | [optional] 
+**ContentType** | **string** | Folder/File | 
 **FileType** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
 ### NewFile
 
-`func NewFile() *File`
+`func NewFile(name string, contentType string, ) *File`
 
 NewFile instantiates a new File object
 This constructor will assign default values to properties that have it defined,
@@ -24,6 +27,71 @@ will change when the set of required properties is changed
 NewFileWithDefaults instantiates a new File object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetName
+
+`func (o *File) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *File) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *File) SetName(v string)`
+
+SetName sets Name field to given value.
+
+
+### GetReadonly
+
+`func (o *File) GetReadonly() bool`
+
+GetReadonly returns the Readonly field if non-nil, zero value otherwise.
+
+### GetReadonlyOk
+
+`func (o *File) GetReadonlyOk() (*bool, bool)`
+
+GetReadonlyOk returns a tuple with the Readonly field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReadonly
+
+`func (o *File) SetReadonly(v bool)`
+
+SetReadonly sets Readonly field to given value.
+
+### HasReadonly
+
+`func (o *File) HasReadonly() bool`
+
+HasReadonly returns a boolean if a field has been set.
+
+### GetContentType
+
+`func (o *File) GetContentType() string`
+
+GetContentType returns the ContentType field if non-nil, zero value otherwise.
+
+### GetContentTypeOk
+
+`func (o *File) GetContentTypeOk() (*string, bool)`
+
+GetContentTypeOk returns a tuple with the ContentType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetContentType
+
+`func (o *File) SetContentType(v string)`
+
+SetContentType sets ContentType field to given value.
+
 
 ### GetFileType
 

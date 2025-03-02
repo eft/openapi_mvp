@@ -4,7 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ContentType** | **string** | Folder/File | 
 **Name** | **string** | The name of the item. | 
 **Readonly** | Pointer to **bool** | Read only if true | [optional] 
 
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 
 ### NewCommonProperties
 
-`func NewCommonProperties(contentType string, name string, ) *CommonProperties`
+`func NewCommonProperties(name string, ) *CommonProperties`
 
 NewCommonProperties instantiates a new CommonProperties object
 This constructor will assign default values to properties that have it defined,
@@ -26,26 +25,6 @@ will change when the set of required properties is changed
 NewCommonPropertiesWithDefaults instantiates a new CommonProperties object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetContentType
-
-`func (o *CommonProperties) GetContentType() string`
-
-GetContentType returns the ContentType field if non-nil, zero value otherwise.
-
-### GetContentTypeOk
-
-`func (o *CommonProperties) GetContentTypeOk() (*string, bool)`
-
-GetContentTypeOk returns a tuple with the ContentType field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetContentType
-
-`func (o *CommonProperties) SetContentType(v string)`
-
-SetContentType sets ContentType field to given value.
-
 
 ### GetName
 

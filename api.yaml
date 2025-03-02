@@ -25,13 +25,8 @@ components:
       - $ref: '#/components/schemas/File'
       - $ref: '#/components/schemas/Folder'
     CommonProperties:
-      discriminator:
-        propertyName: contentType
       type: object
       properties:
-        contentType:
-          description: Folder/File
-          type: string
         name:
           description: The name of the item.
           type: string
@@ -40,12 +35,14 @@ components:
           type: boolean
       required:
       - name
-      - contentType
     Folder:
       allOf:
         - $ref: '#/components/schemas/CommonProperties'
         - type: object
           properties:
+            contentType:
+              description: Folder/File
+              type: string
             children:
               description: Optional files and folders
               items:
@@ -56,10 +53,16 @@ components:
               type: string
           required:
             - color
+            - contentType
     File:
       allOf:
         - $ref: '#/components/schemas/CommonProperties'
         - type: object
           properties:
+            contentType:
+              description: Folder/File
+              type: string          
             fileType:
               type: string
+          required:
+            - contentType

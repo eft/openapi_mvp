@@ -21,7 +21,12 @@ var _ MappedNullable = &File{}
 
 // File struct for File
 type File struct {
-	CommonProperties
+	// The name of the item.
+	Name string `json:"name"`
+	// Read only if true
+	Readonly *bool `json:"readonly,omitempty"`
+	// Folder/File
+	ContentType string `json:"contentType"`
 	FileType *string `json:"fileType,omitempty"`
 }
 
@@ -31,10 +36,10 @@ type _File File
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFile(contentType string, name string) *File {
+func NewFile(name string, contentType string) *File {
 	this := File{}
-	this.ContentType = contentType
 	this.Name = name
+	this.ContentType = contentType
 	return &this
 }
 
@@ -44,6 +49,86 @@ func NewFile(contentType string, name string) *File {
 func NewFileWithDefaults() *File {
 	this := File{}
 	return &this
+}
+
+// GetName returns the Name field value
+func (o *File) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *File) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *File) SetName(v string) {
+	o.Name = v
+}
+
+// GetReadonly returns the Readonly field value if set, zero value otherwise.
+func (o *File) GetReadonly() bool {
+	if o == nil || IsNil(o.Readonly) {
+		var ret bool
+		return ret
+	}
+	return *o.Readonly
+}
+
+// GetReadonlyOk returns a tuple with the Readonly field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *File) GetReadonlyOk() (*bool, bool) {
+	if o == nil || IsNil(o.Readonly) {
+		return nil, false
+	}
+	return o.Readonly, true
+}
+
+// HasReadonly returns a boolean if a field has been set.
+func (o *File) HasReadonly() bool {
+	if o != nil && !IsNil(o.Readonly) {
+		return true
+	}
+
+	return false
+}
+
+// SetReadonly gets a reference to the given bool and assigns it to the Readonly field.
+func (o *File) SetReadonly(v bool) {
+	o.Readonly = &v
+}
+
+// GetContentType returns the ContentType field value
+func (o *File) GetContentType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ContentType
+}
+
+// GetContentTypeOk returns a tuple with the ContentType field value
+// and a boolean to check if the value has been set.
+func (o *File) GetContentTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ContentType, true
+}
+
+// SetContentType sets field value
+func (o *File) SetContentType(v string) {
+	o.ContentType = v
 }
 
 // GetFileType returns the FileType field value if set, zero value otherwise.
@@ -88,14 +173,11 @@ func (o File) MarshalJSON() ([]byte, error) {
 
 func (o File) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	serializedCommonProperties, errCommonProperties := json.Marshal(o.CommonProperties)
-	if errCommonProperties != nil {
-		return map[string]interface{}{}, errCommonProperties
+	toSerialize["name"] = o.Name
+	if !IsNil(o.Readonly) {
+		toSerialize["readonly"] = o.Readonly
 	}
-	errCommonProperties = json.Unmarshal([]byte(serializedCommonProperties), &toSerialize)
-	if errCommonProperties != nil {
-		return map[string]interface{}{}, errCommonProperties
-	}
+	toSerialize["contentType"] = o.ContentType
 	if !IsNil(o.FileType) {
 		toSerialize["fileType"] = o.FileType
 	}
@@ -107,8 +189,8 @@ func (o *File) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"contentType",
 		"name",
+		"contentType",
 	}
 
 	allProperties := make(map[string]interface{})

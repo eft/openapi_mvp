@@ -25,12 +25,7 @@ components:
       - $ref: '#/components/schemas/Folder'
       type: object
     CommonProperties:
-      discriminator:
-        propertyName: contentType
       properties:
-        contentType:
-          description: Folder/File
-          type: string
         name:
           description: The name of the item.
           type: string
@@ -38,13 +33,15 @@ components:
           description: Read only if true
           type: boolean
       required:
-      - contentType
       - name
       type: object
     Folder:
       allOf:
       - $ref: '#/components/schemas/CommonProperties'
       - properties:
+          contentType:
+            description: Folder/File
+            type: string
           children:
             description: Optional files and folders
             items:
@@ -55,13 +52,19 @@ components:
             type: string
         required:
         - color
+        - contentType
         type: object
     File:
       allOf:
       - $ref: '#/components/schemas/CommonProperties'
       - properties:
+          contentType:
+            description: Folder/File
+            type: string
           fileType:
             type: string
+        required:
+        - contentType
         type: object
       example:
         readonly: true
