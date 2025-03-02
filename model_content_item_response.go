@@ -13,7 +13,6 @@ package mvp
 import (
 	"encoding/json"
 	"fmt"
-	"gopkg.in/validator.v2"
 )
 
 // ContentItemResponse - struct for ContentItemResponse
@@ -40,52 +39,38 @@ func FolderAsContentItemResponse(v *Folder) ContentItemResponse {
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *ContentItemResponse) UnmarshalJSON(data []byte) error {
 	var err error
-	match := 0
-	// try to unmarshal data into File
-	err = newStrictDecoder(data).Decode(&dst.File)
-	if err == nil {
-		jsonFile, _ := json.Marshal(dst.File)
-		if string(jsonFile) == "{}" { // empty struct
+	// use discriminator value to speed up the lookup
+	var jsonDict map[string]interface{}
+	err = newStrictDecoder(data).Decode(&jsonDict)
+	if err != nil {
+		return fmt.Errorf("failed to unmarshal JSON into map for the discriminator lookup")
+	}
+
+	// check if the discriminator value is 'File'
+	if jsonDict["contentType"] == "File" {
+		// try to unmarshal JSON data into File
+		err = json.Unmarshal(data, &dst.File)
+		if err == nil {
+			return nil // data stored in dst.File, return on the first match
+		} else {
 			dst.File = nil
-		} else {
-			if err = validator.Validate(dst.File); err != nil {
-				dst.File = nil
-			} else {
-				match++
-			}
+			return fmt.Errorf("failed to unmarshal ContentItemResponse as File: %s", err.Error())
 		}
-	} else {
-		dst.File = nil
 	}
 
-	// try to unmarshal data into Folder
-	err = newStrictDecoder(data).Decode(&dst.Folder)
-	if err == nil {
-		jsonFolder, _ := json.Marshal(dst.Folder)
-		if string(jsonFolder) == "{}" { // empty struct
+	// check if the discriminator value is 'Folder'
+	if jsonDict["contentType"] == "Folder" {
+		// try to unmarshal JSON data into Folder
+		err = json.Unmarshal(data, &dst.Folder)
+		if err == nil {
+			return nil // data stored in dst.Folder, return on the first match
+		} else {
 			dst.Folder = nil
-		} else {
-			if err = validator.Validate(dst.Folder); err != nil {
-				dst.Folder = nil
-			} else {
-				match++
-			}
+			return fmt.Errorf("failed to unmarshal ContentItemResponse as Folder: %s", err.Error())
 		}
-	} else {
-		dst.Folder = nil
 	}
 
-	if match > 1 { // more than 1 match
-		// reset to nil
-		dst.File = nil
-		dst.Folder = nil
-
-		return fmt.Errorf("data matches more than one schema in oneOf(ContentItemResponse)")
-	} else if match == 1 {
-		return nil // exactly one match
-	} else { // no match
-		return fmt.Errorf("data failed to match schemas in oneOf(ContentItemResponse)")
-	}
+	return nil
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON
