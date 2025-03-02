@@ -12,7 +12,6 @@ package mvp
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type CommonProperties struct {
 	Name string `json:"name"`
 	// Read only if true
 	Readonly *bool `json:"readonly,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CommonProperties CommonProperties
@@ -117,6 +117,11 @@ func (o CommonProperties) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Readonly) {
 		toSerialize["readonly"] = o.Readonly
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *CommonProperties) UnmarshalJSON(data []byte) (err error) {
 
 	varCommonProperties := _CommonProperties{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCommonProperties)
+	err = json.Unmarshal(data, &varCommonProperties)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CommonProperties(varCommonProperties)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "readonly")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

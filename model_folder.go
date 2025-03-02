@@ -12,7 +12,6 @@ package mvp
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type Folder struct {
 	Children []ContentItemResponse `json:"children,omitempty"`
 	// contrived property for testing purposes
 	Color string `json:"color"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Folder Folder
@@ -210,6 +210,11 @@ func (o Folder) ToMap() (map[string]interface{}, error) {
 		toSerialize["children"] = o.Children
 	}
 	toSerialize["color"] = o.Color
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -239,15 +244,24 @@ func (o *Folder) UnmarshalJSON(data []byte) (err error) {
 
 	varFolder := _Folder{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFolder)
+	err = json.Unmarshal(data, &varFolder)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Folder(varFolder)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "readonly")
+		delete(additionalProperties, "contentType")
+		delete(additionalProperties, "children")
+		delete(additionalProperties, "color")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

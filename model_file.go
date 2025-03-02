@@ -12,7 +12,6 @@ package mvp
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type File struct {
 	// Folder/File
 	ContentType string `json:"contentType"`
 	FileType *string `json:"fileType,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _File File
@@ -181,6 +181,11 @@ func (o File) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FileType) {
 		toSerialize["fileType"] = o.FileType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -209,15 +214,23 @@ func (o *File) UnmarshalJSON(data []byte) (err error) {
 
 	varFile := _File{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFile)
+	err = json.Unmarshal(data, &varFile)
 
 	if err != nil {
 		return err
 	}
 
 	*o = File(varFile)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "readonly")
+		delete(additionalProperties, "contentType")
+		delete(additionalProperties, "fileType")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
